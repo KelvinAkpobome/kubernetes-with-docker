@@ -31,6 +31,11 @@
           update_cache: yes
 
 
+      - name: Delete previous docker configuration file if present.
+        file:
+          path:  /etc/docker/daemon.json
+          state: absent
+
       - name: Create a configuration file for docker
         file:
           path:  /etc/docker/daemon.json
@@ -44,10 +49,10 @@
           path:  /etc/docker/daemon.json
           marker: ""
           block: |
-             "exec-opts": ["native.cgroupdriver=systemd"],
+             {"exec-opts": ["native.cgroupdriver=systemd"],
              "log-driver": "json-file",
              "log-opts": { "max-size": "100m"},
-             "storage-driver": "overlay2"
+             "storage-driver": "overlay2"}
 
       - name: Restarting daemon and docker
         systemd:
