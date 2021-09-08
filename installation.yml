@@ -49,10 +49,14 @@
           path:  /etc/docker/daemon.json
           marker: ""
           block: |
-             {"exec-opts": ["native.cgroupdriver=systemd"],
-             "log-driver": "json-file",
-             "log-opts": { "max-size": "100m"},
-             "storage-driver": "overlay2"}
+             {
+               "exec-opts": ["native.cgroupdriver=systemd"],
+               "log-driver": "json-file",
+               "log-opts": { 
+                            "max-size": "100m"
+                },
+               "storage-driver": "overlay2"
+             }
 
       - name: Restarting daemon and docker
         systemd:
