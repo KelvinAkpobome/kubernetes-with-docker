@@ -41,8 +41,7 @@
           path:  /etc/docker/daemon.json
           state: touch
           owner: root
-          group: root
-          mode: '0700'
+         
 
       - name: Set the configuration for docker to use systemd.
         blockinfile:
