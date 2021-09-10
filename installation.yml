@@ -83,13 +83,13 @@
 
       - name: install kubelet
         apt:
-          name: kubelet=1.21.3
+          name: kubelet=1.22.1-00
           state: present
           update_cache: true
 
       - name: install kubeadm
         apt:
-          name: kubeadm=1.21.3
+          name: kubeadm=1.22.1-00
           state: present
 
 
@@ -103,7 +103,7 @@
 
       - name: install kubectl
         apt:
-          name: kubectl=1.21.3
+          name: kubectl=1.22.1-00
           state: present
           force: yes
 
