@@ -193,9 +193,18 @@
     become: yes
     tasks:
 
-      - name: join cluster
+      - name: joining worker 1 to cluster
         become_user: root                                            
         become_method: sudo 
-        shell: "{{ hostvars['master'].join_command }} "
+        shell: "{{ hostvars['master_1'].join_command }} "
         args:
           chdir: $HOME
+        delegate_to: worker1
+
+      - name: joining worker 2 to cluster 
+        become_user: root                                            
+        become_method: sudo 
+        shell: "{{ hostvars['master_2'].join_command }} "
+        args:
+          chdir: $HOME
+        delegate_to: worker2
