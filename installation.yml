@@ -4,11 +4,18 @@
     become: yes
     tasks:
 
-      - name: update and upgrade apt package
-        apt: 
-          upgrade: "yes"
-          update_cache: "yes"
-          cache_valid_time: "86400" 
+       - name: Update apt Cache
+         apt: 
+           update_cache: yes
+           force_apt_get: yes
+       - name: Wait for APT Lock
+         shell:  while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done;
+       - name: Install Apt Packages
+         apt:
+           name: "{{ apt_packages }}"
+           state: present
+           force_apt_get: yes
+
 
       - name: create the 'student' user
         user: name=student state=present create_home=yes shell=/bin/bash group=admin 
